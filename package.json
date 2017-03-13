@@ -1,0 +1,23 @@
+{
+  "name": "api-starter",
+  "version": "1.0.0",
+  "description": "kudo node.js template",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kudobuzz/nodejs-api-starter.git"
+  },
+  "author": "william <obeng.kojo.william@gmail.com> (https://williamobeng.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kudobuzz/nodejs-api-starter/issues"
+  },
+  "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme"
+}
