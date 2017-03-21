@@ -2,7 +2,7 @@
   "name": "api-starter",
   "version": "1.0.0",
   "description": "kudo node.js template",
-  "main": "server.js",
+  "main": "service/api/client.js",
   "directories": {
     "test": "test"
   },
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/kudobuzz/nodejs-api-starter/issues"
   },
-  "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme"
+  "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
+  "dependencies": {
+    "superagent": "3.5.1"
+  }
 }

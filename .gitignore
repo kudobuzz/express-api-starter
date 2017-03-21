@@ -1,0 +1,19 @@
+# ignore installed modules
+node_modules/*
+
+# ignore swap files
+*.swp
+*.swo
+
+#ignore todo.txt
+todo.txt
+
+
+# ignore local test coverage report
+coverage/*
+
+# exclude .evn
+.env
+
+# exclude npm logs
+npm-debug.log
