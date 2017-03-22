@@ -24,4 +24,6 @@ Requirements
 - Add support for documentation testing with dredd
 - Add persistence layer to models to easily support other databases
 - Add bunyan to log request
-
+- Add support for jsdoc.
+- Add environment variable validation at startup 
+- Use nconv
