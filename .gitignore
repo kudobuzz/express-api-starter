@@ -17,3 +17,6 @@ coverage/*
 
 # exclude npm logs
 npm-debug.log
+
+# api docs
+apidocs/api.html

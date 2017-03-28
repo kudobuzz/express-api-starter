@@ -27,3 +27,6 @@ Requirements
 - Add support for jsdoc.
 - Add environment variable validation at startup 
 - Use nconv
+
+
+[Why we decided to go with just npm scripts](https://medium.freecodecamp.com/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8)

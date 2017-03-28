@@ -7,8 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm test",
-    "start": "node server.js"
+    "test": "standard",
+    "start": "node server.js",
+    "fix:lint": "standard --fix",
+    "docs": "aglio -i docs/api.md -o apidocs/api.html",
+    "docs:server": "aglio -i docs/api.md --server"
   },
   "repository": {
     "type": "git",
@@ -21,9 +24,11 @@
   },
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
+    "standard": "9.0.2",
     "superagent": "3.5.1"
   },
   "devDependencies": {
+    "aglio": "2.3.0",
     "chai": "3.5.0",
     "mocha": "3.2.0",
     "supertest": "3.0.0"
