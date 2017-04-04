@@ -1,11 +1,11 @@
-(function () {
+(() => {
   'use strict'
 
   const chai = require('chai')
   const expect = chai.expect
 
   describe('MongoDB Component', () => {
-    it('should throw error if DB_URL env is undefined', (done) => {
+    it('should throw error if DB_URL is undefined', (done) => {
       try {
         require('./mongodb')
       } catch (e) {
@@ -25,7 +25,7 @@
       }
     })
 
-    it('should return mongodb', () => {
+    it('should return mongodb if validation is successful', () => {
       process.env.DB_URL = 'mongodb://localhost:3000/test'
 
       const mongodb = require('./mongodb')
