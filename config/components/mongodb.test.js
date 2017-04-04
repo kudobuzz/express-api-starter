@@ -1,33 +1,35 @@
-(function () {
-  'use strict';
+'use strict'
 
-  const joi    = require('joi');
-  const nconf  = require('nconf');
+const chai = require('chai')
+const expect = chai.expect
+// const assert = require('assert')
 
-  const enVarsSchema = joi.object({
-    AUTH_SERVER_SESSION_SECRET : joi.string().required(),
-    TOKEN_ISSUER : joi.string().required(),
-    API_HOST_URL:joi.string().uri().required(),
-    ENCRYPT_DECRYPT_PASSWORD: joi.string().required(),
-    ENCRYPT_DECRYPT_ALGORITHM: joi.string().required(),
-    RESET_PASSWORD_TOKEN: joi.string().required(),
-    APP_DOMAIN:joi.string().uri({scheme:'https'}).required()
-
-
+describe('MongoDB Component', () => {
+  it('should throw error if DB_URL env is undefined', (done) => {
+    try {
+      require('./mongodb')
+    } catch (e) {
+      expect(e.message).to.equal('Config validation error: child "DB_URL" fails because ["DB_URL" is required]')
+      done()
+    }
   })
-  .unknown();
 
-  const  { error, value: env} = joi.validate(process.env, enVarsSchema);
+  it('should throw error if DB_URL scheme is not mongodb', (done) => {
+    process.env.DB_URL = 'mysql://localhost:3000/test'
 
-  if (error) {
-    throw new Error(`Config validation error: ${error.message}`);
-  }
+    try {
+      require('./mongodb')
+    } catch (e) {
+      expect(e.message).to.equal('Config validation error: child "DB_URL" fails because ["DB_URL" must be a valid uri with a scheme matching the mongodb pattern]')
+      done()
+    }
+  })
 
-  module.exports ={
-    AUTH_SERVER_SESSION_SECRET: env.AUTH_SERVER_SESSION_SECRET,
-    TOKEN_ISSUER: env.TOKEN_ISSUER,
-    NOTIFY_BUSINESS_ON_COUPON_EXPIRATION:2,
-    REMOVE_TESTIMONIAL_ON_UNPUBLISH:90,
-    REMOVE_REVIEW_ON_CANCEL_BUSINESS: 7
-  };
-})();
+  it('should return mongodb', () => {
+    process.env.DB_URL = 'mongodb://localhost:3000/test'
+
+    const mongodb = require('./mongodb')
+
+    expect(mongodb.DB_URL).to.equal(process.env.DB_URL)
+  })
+})
