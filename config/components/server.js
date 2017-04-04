@@ -3,8 +3,7 @@
 const joi = require('joi')
 
 const envVarsSchema = joi.object({
-  PORT: joi.number()
-    .required()
+  PORT: joi.number().required()
 }).unknown()
 
 const { error, value: env } = joi.validate(process.env, envVarsSchema)
