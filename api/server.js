@@ -19,10 +19,7 @@ const stopServer = _ => {
   }
 }
 
-
 servicesManager(db)
   .connect()
   .on('services:ready', startServer)
   .on('services:disconnected', stopServer)
-
-
