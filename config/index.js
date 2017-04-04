@@ -8,7 +8,6 @@ if (NODE_ENV === 'development') {
   require('dotenv').config()
 }
 
-
 try {
   config = require('./api')
 } catch (error) {

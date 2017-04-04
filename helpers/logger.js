@@ -38,7 +38,6 @@ morgan.token('type', req => 'reqResLogger')
 
 morgan.token('req-id', req => req.id)
 
-
 /**
  * This allows morgan to use bunyan for logging
  * @return {Object} Describes write field that will passed to morgan stream.
@@ -48,7 +47,6 @@ const bunyanMorganStream = _ => {
   const write = log.info
   return {write}
 }
-
 
 /**
    * A simple middleware function to attach a log field to each req.
