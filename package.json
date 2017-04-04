@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "kudo node.js template",
   "main": "service/api/client.js",
-  "directories": {
-    "test": "test"
+  "engines": {
+    "node": ">=7.7.4"
   },
   "scripts": {
     "test": "standard --verbose  | snazzy",
@@ -25,10 +25,15 @@
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
     "body-parser": "1.17.1",
+    "bunyan": "1.8.9",
     "cors": "2.8.1",
     "dotenv": "4.0.0",
     "express": "4.15.2",
+    "global": "4.3.1",
     "joi": "10.3.1",
+    "mongoose": "4.9.2",
+    "morgan": "1.8.1",
+    "nodemon": "1.11.0",
     "standard": "9.0.2",
     "superagent": "3.5.1"
   },
@@ -38,7 +43,9 @@
     "mocha": "3.2.0",
     "supertest": "3.0.0"
   },
-  "standard":{
-    "env":["mocha"]
+  "standard": {
+    "env": [
+      "mocha"
+    ]
   }
 }

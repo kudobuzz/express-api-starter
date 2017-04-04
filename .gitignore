@@ -19,4 +19,4 @@ coverage/*
 npm-debug.log
 
 # api docs
-apidocs/api.html
+docs/api.html

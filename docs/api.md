@@ -1,6 +1,6 @@
 FORMAT: 1A
 # Todo Service
-Todo is a simple service that provides and api to get and list all todos.
+Todo is a simple service that provides an api to get and list all todos.
 
 # Group Todo
 Resources related to todo api
