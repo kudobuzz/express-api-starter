@@ -7,7 +7,7 @@
     "node": ">=7.7.4"
   },
   "scripts": {
-    "test": "standard --fix && standard --verbose | snazzy && mocha",
+    "test": "standard --fix && standard --verbose | snazzy && mocha --recursive './{,!(node_modules)/**/}*.test.js'",
     "start": "node server.js",
     "fix:lint": "standard --fix",
     "docs": "aglio -i docs/api.md -o apidocs/api.html",
