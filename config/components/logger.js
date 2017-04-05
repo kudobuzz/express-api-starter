@@ -27,5 +27,5 @@ const config = {
     enabled: envVars.LOG_ENABLED
   }
 }
-console.log('returning config module')
+
 module.exports = config
