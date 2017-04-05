@@ -12,10 +12,10 @@
     "fix:lint": "standard --fix",
     "docs": "aglio -i docs/api.md -o apidocs/api.html",
     "docs:server": "aglio -i docs/api.md --server",
-    "pre-commit-message": "echo 'Pre-commit checks...' && exit 0"
+    "precommit-message": "echo 'Pre-commit checks...' && exit 0"
   },
   "pre-commit": {
-    "run": ["pre-commit-message", "fix:lint", "test"]
+    "run": ["precommit-message", "fix:lint", "test"]
   },
   "repository": {
     "type": "git",
