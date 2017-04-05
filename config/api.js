@@ -5,7 +5,4 @@ const components = require('./components')
 /**
  * Module exports
  */
-module.exports = Object.assign({},
-  components.mongodb,
-  components.server
-)
+module.exports = Object.assign({}, components)
