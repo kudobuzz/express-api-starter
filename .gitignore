@@ -12,7 +12,7 @@ todo.txt
 # ignore local test coverage report
 coverage/*
 
-# exclude .evn
+# exclude .env
 .env
 
 # exclude npm logs
