@@ -7,7 +7,9 @@
     "node": ">=7.7.4"
   },
   "scripts": {
-    "test": "standard --verbose  | snazzy && mocha",
+    "lint": "standard --verbose  | snazzy",
+    "istanbul:cover": "istanbul cover _mocha --recursive './{,!(node_modules)/**/}*.test.js'",
+    "test": "npm run lint && npm run istanbul:cover",
     "start": "node server.js",
     "fix:lint": "standard --fix",
     "docs": "aglio -i docs/api.md -o apidocs/api.html",
@@ -40,6 +42,7 @@
   "devDependencies": {
     "aglio": "2.3.0",
     "chai": "3.5.0",
+    "istanbul": "0.4.5",
     "mocha": "3.2.0",
     "snazzy": "6.0.0",
     "supertest": "3.0.0"
