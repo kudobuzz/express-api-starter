@@ -9,8 +9,8 @@
   "scripts": {
     "lint": "standard --verbose  | snazzy",
     "istanbul:cover": "istanbul cover _mocha --recursive './{,!(node_modules)/**/}*.test.js'",
-    "istanbul:check-coverage": "istanbul check-coverage",
-    "test": "npm run lint && npm run istanbul:cover && npm run istanbul:check-coverage",
+    "istanbul:check-coverage": "npm istanbul:cover && istanbul check-coverage",
+    "test": "npm run lint && npm run istanbul:check-coverage",
     "start": "node server.js",
     "fix:lint": "standard --fix",
     "docs": "aglio -i docs/api.md -o apidocs/api.html",
