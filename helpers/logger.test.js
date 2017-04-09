@@ -92,22 +92,26 @@ describe('Logger Helper', () => {
     const middleware = obj.attachLogToReq(routeName)
     assert.isFunction(middleware)
 
-    // capture the reqest response log
-    const unhook = hookStd.stdout(log => {
-      unhook()
-      log = JSON.parse(log)
+    function interceptStdout (msg) {
+      // capture the reqest response log
+      const unhook = hookStd.stdout(log => {
+        unhook()
+        log = JSON.parse(log)
 
-      assert.isObject(log)
-      expect(log).to.have.property('name', 'serviceName')
-      expect(log).to.have.property('hostname', os.hostname())
-      expect(log).to.have.property('type', routeName)
-      expect(log).to.have.property('msg', `inside route ${routeName}`)
-      expect(log).to.have.property('v', 0)
-      expect(log).to.have.property('level')
-      expect(log).to.have.property('pid')
-      expect(log).to.have.property('time')
-    })
+        assert.isObject(log)
+        expect(log).to.have.property('name', 'serviceName')
+        expect(log).to.have.property('hostname', os.hostname())
+        expect(log).to.have.property('type', routeName)
+        expect(log).to.have.property('msg', msg)
+        expect(log).to.have.property('v', 0)
+        expect(log).to.have.property('level')
+        expect(log).to.have.property('pid')
+        expect(log).to.have.property('time')
+      })
+    }
 
+    // Intercept the log message
+    interceptStdout(`inside route ${routeName}`)
     // Call middleware
     middleware(req, res, done)
     expect(req).to.have.property('log')
@@ -116,6 +120,10 @@ describe('Logger Helper', () => {
     assert.isObject(req.log)
     assert.isFunction(req.log.info)
     assert.isFunction(req.log.error)
+
+    const logMsg = 'Informational message about request'
+    interceptStdout(logMsg)
+    req.log.info(logMsg)
   })
 
   it('should throw error if routeName is not specified when using attachLogToReq', () => {
