@@ -1,11 +1,7 @@
 'use strict'
 
-const components = require('./components')
+const mongodb = require('./components/mongodb')
+const server = require('./components/server')
+const logger = require('./components/logger')
 
-/**
- * Module exports
- */
-module.exports = Object.assign({},
-  components.mongodb,
-  components.server
-)
+module.exports = Object.assign({}, mongodb, server, logger)
