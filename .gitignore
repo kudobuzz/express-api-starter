@@ -18,5 +18,8 @@ coverage/*
 # exclude npm logs
 npm-debug.log
 
+# exclude yarn error logs
+yarn-error.log
+
 # api docs
 docs/api.html

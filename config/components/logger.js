@@ -3,10 +3,10 @@
 const joi = require('joi')
 
 const envVarsSchema = joi.object({
-  LOGGER_LEVEL: joi.string()
-    .allow(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
+  LOG_LEVEL: joi.string()
+    .valid(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
     .default('info'),
-  LOGGER_ENABLED: joi.boolean()
+  LOG_ENABLED: joi.boolean()
     .truthy('TRUE')
     .truthy('true')
     .falsy('FALSE')
@@ -16,6 +16,7 @@ const envVarsSchema = joi.object({
   .required()
 
 const { error, value: envVars } = joi.validate(process.env, envVarsSchema)
+
 if (error) {
   throw new Error(`Config validation error: ${error.message}`)
 }
@@ -26,4 +27,5 @@ const config = {
     enabled: envVars.LOG_ENABLED
   }
 }
+
 module.exports = config

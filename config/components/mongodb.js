@@ -13,5 +13,5 @@ if (error) {
 }
 
 module.exports = {
-  DB_URL: error ? null : env.DB_URL
+  DB_URL: env.DB_URL
 }
