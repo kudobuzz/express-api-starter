@@ -1,74 +1,51 @@
 'use strict'
 
 const expect = require('chai').expect
-const decache = require('decache')
+const utils = require('../../test/utils')
 
-describe('Logger Component', () => {
-  const moduleName = './logger'
+describe('Logger config component', () => {
+  const componentPath = './logger'
 
   beforeEach(() => {
-    // Unset the env keys before each test
-    delete process.env.LOG_LEVEL
-    delete process.env.LOG_ENABLED
-
-    // Remove any cached instance of the module before each test
-    decache(moduleName)
+    process.env = {} // Unset the env keys before each test
+    utils.deleteAllRequireCache() // Delete all modules in cache
   })
 
   describe('LOG_LEVEL', () => {
-    it('should return error if value is not allowed', () => {
+    it('should throw an error if "LOG_LEVEL" is not allowed', () => {
       process.env.LOG_LEVEL = 'strict'
+      const errorMsg = 'Config validation error: child "LOG_LEVEL" fails because ["LOG_LEVEL" must be one of [error, warn, info, verbose, debug]]'
 
-      expect(() => require(moduleName)).to
-        .throw('Config validation error: child "LOG_LEVEL" fails because ["LOG_LEVEL" must be one of [error, warn, info, verbose, debug, silly]]')
+      expect(() => require(componentPath)).to.throw(errorMsg)
     })
 
-    it('should set to value if valid/allowed', () => {
+    it('should set log leval if value is allowed', () => {
       process.env.LOG_LEVEL = 'warn'
 
-      expect(require(moduleName)).to.deep.equal({
-        logger: {
-          level: 'warn',
-          enabled: true
-        }
-      })
+      expect(require(componentPath).LOG_LEVEL).to.equal('warn')
     })
 
-    it('should default to info if not explicitly provided', () => {
-      expect(require(moduleName)).to.deep.equal({
-        logger: {
-          level: 'info',
-          enabled: true
-        }
-      })
+    it('should default to "info" if not explicitly provided', () => {
+      expect(require(componentPath).LOG_LEVEL).to.equal('info')
     })
   })
 
   describe('LOG_ENABLED', () => {
     it('should return error if value is not allowed', () => {
       process.env.LOG_ENABLED = 1
+      const errorMsg = 'Config validation error: child "LOG_ENABLED" fails because ["LOG_ENABLED" must be a boolean]'
 
-      expect(() => require(moduleName)).to.throw('Config validation error: child "LOG_ENABLED" fails because ["LOG_ENABLED" must be a boolean]')
+      expect(() => require(componentPath)).to.throw(errorMsg)
     })
 
     it('should default to true if not explicitly provided', () => {
-      expect(require(moduleName)).to.deep.equal({
-        logger: {
-          level: 'info',
-          enabled: true
-        }
-      })
+      expect(require(componentPath).LOG_ENABLED).to.equal(true)
     })
 
-    it('should set to value if valid/allowed', () => {
+    it('should enable/disable log if value is allowed', () => {
       process.env.LOG_ENABLED = 'false'
 
-      expect(require(moduleName)).to.deep.equal({
-        logger: {
-          level: 'info',
-          enabled: false
-        }
-      })
+      expect(require(componentPath).LOG_ENABLED).to.equal(false)
     })
   })
 })

@@ -18,5 +18,8 @@ coverage/*
 # exclude npm logs
 npm-debug.log
 
+# Ignore test coverage
+converage/
+
 # api docs
 docs/api.html

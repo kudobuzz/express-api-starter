@@ -1,40 +1,43 @@
 'use strict'
 
 const expect = require('chai').expect
-const decache = require('decache')
+const utils = require('../../test/utils')
 
-describe('Server Component', () => {
-  const moduleName = './server'
+describe('Server Config Component', () => {
+  const component = './server'
 
   beforeEach(() => {
-    delete process.env.PORT
-
-    // Delete any cached instance of the module - we want a fresh copy for each test
-    decache(moduleName)
+    process.env = {} // Unset the env keys before each test
+    utils.deleteAllRequireCache() // Delete all modules in cache
   })
 
   it('should throw error if PORT is undefined', () => {
-    expect(() => require(moduleName)).to.throw('Config validation error: child "PORT" fails because ["PORT" is required]')
+    const errorMsg = 'Config validation error: child "PORT" fails because ["PORT" is required]'
+
+    expect(() => require(component)).to.throw(errorMsg)
   })
 
   describe('port must be an integer', () => {
     it('should throw error if PORT is not a number', () => {
+      const errorMsg = 'Config validation error: child "PORT" fails because ["PORT" must be a number]'
+
       process.env.PORT = 'the-port'
 
-      expect(() => require(moduleName)).to.throw('Config validation error: child "PORT" fails because ["PORT" must be a number]')
+      expect(() => require(component)).to.throw(errorMsg)
     })
 
     it('should throw error if PORT is not a positive number (integer)', () => {
+      const errorMsg = 'Config validation error: child "PORT" fails because ["PORT" must be larger than or equal to 1]'
+
       process.env.PORT = -2000
 
-      expect(() => require(moduleName)).to
-        .throw('Config validation error: child "PORT" fails because ["PORT" must be larger than or equal to 1]')
+      expect(() => require(component)).to.throw(errorMsg)
     })
   })
 
   it('should return port number if validation is successful', () => {
     process.env.PORT = 2000
 
-    expect(require(moduleName).PORT).to.equal(2000)
+    expect(require(component).PORT).to.equal(2000)
   })
 })

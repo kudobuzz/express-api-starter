@@ -4,7 +4,7 @@ const joi = require('joi')
 
 const envVarsSchema = joi.object({
   LOG_LEVEL: joi.string()
-    .valid(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
+    .valid(['error', 'warn', 'info', 'verbose', 'debug'])
     .default('info'),
   LOG_ENABLED: joi.boolean()
     .truthy('TRUE')
@@ -22,10 +22,8 @@ if (error) {
 }
 
 const config = {
-  logger: {
-    level: envVars.LOG_LEVEL,
-    enabled: envVars.LOG_ENABLED
-  }
+  LOG_LEVEL: envVars.LOG_LEVEL,
+  LOG_ENABLED: envVars.LOG_ENABLED
 }
 
 module.exports = config
