@@ -123,4 +123,24 @@ describe('Logger Helper', () => {
 
     expect(() => obj.attachLogToReq()).to.throw('Feature tag is required')
   })
+
+  it('should log using logger object', () => {
+    const obj = require(moduleName)
+    const msg = '--dev flag is deprecated. Use --only=dev'
+
+    const unhook = hookStd.stdout(log => {
+      unhook()
+      log = JSON.parse(log)
+
+      assert.isObject(log)
+      expect(log).to.have.property('name', 'serviceName')
+      expect(log).to.have.property('hostname', os.hostname())
+      expect(log).to.have.property('msg', msg)
+      expect(log).to.have.property('v', 0)
+      expect(log).to.have.property('level', 40)
+      expect(log).to.have.property('time')
+    })
+
+    obj.logger.warn(msg)
+  })
 })
