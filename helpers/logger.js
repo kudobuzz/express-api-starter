@@ -40,31 +40,33 @@ morgan.token('req-id', req => req.id)
 
 /**
  * This allows morgan to use bunyan for logging
- * @return {Object} Describes write field that will passed to morgan stream.
+ * @return {Object} Describes write field that will be passed to morgan stream to log requests at info level
  */
 const bunyanMorganStream = _ => {
-  const log = logger.child({type: 'requestLogger'})
-  const write = log.info
-  return {write}
+  const log = logger.child({ type: 'requestLogger' })
+  const write = log.info.bind(log)
+
+  return { write }
 }
 
 /**
-   * A simple middleware function to attach a log field to each req.
-   * @param  {Object}   req
-   * @param  {Object}   res
-   * @param  {Function} next
-   */
+ * A simple middleware function to attach a log field to each req.
+ * @param  {Object}   req
+ * @param  {Object}   res
+ * @param  {Function} next
+ */
 const attachLogToReq = routeName => {
   if (!routeName) {
     throw new Error('Feature tag is required')
   }
 
-  const log = logger.child({type: routeName})
+  const log = logger.child({ type: routeName })
 
   return (req, res, next) => {
     if (log) {
       req.log = log
-      log.info(`insider route ${routeName}`)
+
+      log.info(`inside route ${routeName}`)
     }
     next()
   }
@@ -72,6 +74,6 @@ const attachLogToReq = routeName => {
 
 module.exports = {
   logger,
-  reqResLogger: morgan(morganLogFormat.join(' '), {stream: bunyanMorganStream}),
+  reqResLogger: morgan(morganLogFormat.join(' '), { stream: bunyanMorganStream() }),
   attachLogToReq
 }
