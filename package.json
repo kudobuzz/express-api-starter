@@ -7,7 +7,7 @@
     "node": ">=7.7.4"
   },
   "scripts": {
-    "test": "standard --fix && standard --verbose | snazzy && mocha --recursive './{,!(node_modules)/**/}*.test.js'",
+    "test": "standard --fix && standard --verbose | snazzy && NODE_ENV=test mocha --recursive './{,!(node_modules)/**/}*.test.js'",
     "start": "node server.js",
     "fix:lint": "standard --fix",
     "docs": "aglio -i docs/api.md -o apidocs/api.html",
@@ -25,7 +25,6 @@
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
     "body-parser": "1.17.1",
-    "bunyan": "1.8.9",
     "cors": "2.8.1",
     "dotenv": "4.0.0",
     "express": "4.15.2",
@@ -39,9 +38,12 @@
   },
   "devDependencies": {
     "aglio": "2.3.0",
+    "bunyan": "1.8.10",
     "chai": "3.5.0",
     "decache": "4.1.0",
+    "hook-std": "0.3.0",
     "mocha": "3.2.0",
+    "node-mocks-http": "1.6.1",
     "snazzy": "6.0.0",
     "supertest": "3.0.0"
   },
