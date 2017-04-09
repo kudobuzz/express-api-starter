@@ -1,0 +1,13 @@
+instrumentation:
+    root: .
+    extensions:
+        - .js
+    default-excludes: true
+    excludes: ['coverage/*', '*.test.js']
+    include-all-sources: true
+check:
+    global:  
+        statements: 10
+        lines: 10
+        functions:  0
+        branches: 5

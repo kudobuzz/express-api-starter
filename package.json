@@ -7,6 +7,10 @@
     "node": ">=7.7.4"
   },
   "scripts": {
+    "lint": "standard --verbose  | snazzy",
+    "istanbul:cover": "istanbul cover _mocha --recursive './{,!(node_modules)/**/}*.test.js'",
+    "istanbul:check-coverage": "npm istanbul:cover && istanbul check-coverage",
+    "test": "npm run lint && npm run istanbul:check-coverage",
     "test": "standard --fix && standard --verbose | snazzy && mocha --recursive './{,!(node_modules)/**/}*.test.js'",
     "start": "node server.js",
     "fix:lint": "standard --fix",
@@ -44,6 +48,7 @@
   "devDependencies": {
     "aglio": "2.3.0",
     "chai": "3.5.0",
+    "istanbul": "0.4.5",
     "decache": "4.1.0",
     "mocha": "3.2.0",
     "pre-commit": "1.2.2",
