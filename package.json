@@ -8,7 +8,7 @@
   },
   "scripts": {
     "pretest": "npm run lint",
-    "prepush": "npm run linclt",
+    "prepush": "npm run lint",
     "test": "npm-run-all --parallel test:* ",
     "test:api": "NODE_ENV=test PROCESS_TYPE=api  mocha test/setup.js 'api/**/*.test.js'",
     "test:others": "NODE_ENV=test PROCESS_TYPE=api mocha test/setup.js  './{,!(node_modules|coverage|docs)/**/}*.test.js'",
