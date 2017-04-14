@@ -2,9 +2,9 @@
   const request = require('supertest')
 
   describe('Todo tests', function () {
-    it('/api/todos/ should return a json array', function (done) {
+    it('/api/todo/todos should return a json array', function (done) {
       request(app)
-            .get('/api/todos')
+            .get('/api/todo/todos')
             .expect(200)
             .expect('Content-Type', /json/)
             .expect(function (res) {
