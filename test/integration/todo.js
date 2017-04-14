@@ -8,8 +8,7 @@ describe('Todo tests', function () {
     request(app)
             .get('/api/todos')
             .end(function (err, res) {
-              expect(res.body).to.be.json;
-              expect(Array.isArray(res.body)).to.be.true;
+              expect(Array.isArray(res.body)).to.equal(true)
               done(err)
             })
   })
@@ -19,7 +18,6 @@ describe('Todo tests', function () {
            .post('/api/todo/create')
            .send({title: 'some title'})
            .end(function (err, res) {
-             expect(res.body).to.be.json;
              expect(res.body.title).to.equal('some title')
              done(err)
            })
