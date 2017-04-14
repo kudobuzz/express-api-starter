@@ -4,7 +4,7 @@ const request = require('supertest')
 const expect = chai.expect
 
 describe('Todo tests', function () {
-  it('/api/todo/list should return a json array', function (done) {
+  it('/api/todos/ should return a json array', function (done) {
     request(app)
             .get('/api/todos')
             .end(function (err, res) {
