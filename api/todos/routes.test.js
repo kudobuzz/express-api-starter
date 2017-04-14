@@ -1,4 +1,4 @@
-  const app = require('../../lib/app.js')
+  const app = require('../app.js')
   const request = require('supertest')
 
   describe('Todo tests', function () {
