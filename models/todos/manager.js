@@ -1,18 +1,11 @@
 const mongoose = require('mongoose')
+const BaseManager = require('../basemanager.js')
 const model = mongoose.model('Todo', require('./schema.js'))
 
-class TodoManager {
-  create (options) {
-    return model.create(options.draft)
+class TodoManager extends BaseManager {
+  constructor () {
+    super(model)
   }
-
-  read (options) {
-    return model.find(options.query)
-  }
-
-  update (options) {
-    return model.findOneAndUpdate(options.query, options.update, {new: true})
-  }
-}
+    }
 
 module.exports = TodoManager
