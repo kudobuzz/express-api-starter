@@ -12,7 +12,9 @@
                 throw new Error('did not respond with a json array')
               }
             })
-            .end(done)
+            .end(function () {
+              done()
+            })
     })
 
     it('/api/todo/create to accept a title and return a todo object', function (done) {
