@@ -1,10 +1,10 @@
 'use strict'
-const app = require('./app')()
+const app = require('./app')
 const config = require('../config')
-const db = require('../helpers/services/db')()
-const servicesManager = require('../helpers/services/manage-services')
+const db = require('../lib/services/db')()
+const servicesManager = require('../lib/services/manage-services')
 
-const log = require('../helpers/logger').logger.child({type: 'server'})
+const log = require('../lib/logger')().child({type: 'server'})
 let server
 
 const startServer = _ => {

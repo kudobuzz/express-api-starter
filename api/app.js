@@ -1,14 +1,12 @@
 'use strict'
 
 const express = require('express')
-const cors = require('cors')
 const bodyParser = require('body-parser')
+const todoRouter = require('./todos/routes.js')
 
 const app = express()
 
-module.exports = _ => {
-  app.use(bodyParser.json())
-  app.use(cors())
+app.use(bodyParser.json())
+app.use('/api/todo/', todoRouter)
 
-  return app
-}
+module.exports = app
