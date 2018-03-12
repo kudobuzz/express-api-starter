@@ -1,6 +1,6 @@
 'use strict'
 
-const mongoose = require('@okudobuzz/mongodb-utils').getMongoose()
+const mongoose = require('@kudobuzz/mongodb-utils').getMongoose()
 const { expect } = require('chai')
 const { schema } = require('./index')
 
