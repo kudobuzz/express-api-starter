@@ -3,13 +3,14 @@
 const sinon = require('sinon')
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
+const chaiAsPromised = require('chai-as-promised')
+const { dbSetup, tearDown } = require('./utils')
 
-process.env.DB_URL = 'mongodb://localhost/testdb'
-process.env.LOG_ENABLED = false
-process.env.PORT = 4000
-
-before(() => {
+before(async () => {
+  await dbSetup()
+  await tearDown()
   chai.use(sinonChai)
+  chai.use(chaiAsPromised)
 })
 
 beforeEach(function beforeEach () {
