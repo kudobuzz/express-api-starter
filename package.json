@@ -43,6 +43,7 @@
   "devDependencies": {
     "aglio": "2.3.0",
     "chai": "3.5.0",
+    "chai-as-promised": "^7.1.1",
     "cross-env": "4.0.0",
     "dotenv": "4.0.0",
     "husky": "0.13.3",
