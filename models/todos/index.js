@@ -14,7 +14,7 @@ const TodoManager = {
     return baseModel.create(options)
   },
 
-  get (query = {}) {
+  read ({ query }) {
     const options = {
       model,
       query
