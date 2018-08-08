@@ -1,15 +1,17 @@
 'use strict'
 
-const sinon = require('sinon')
 const chai = require('chai')
+const nock = require('nock')
+const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
-
-process.env.DB_URL = 'mongodb://localhost/testdb'
-process.env.LOG_ENABLED = false
-process.env.PORT = 4000
+const { dbSetup, tearDown } = require('./utils')
+const chaiAsPromised = require('chai-as-promised')
 
 before(() => {
+  dbSetup()
+  tearDown()
   chai.use(sinonChai)
+  chai.use(chaiAsPromised)
 })
 
 beforeEach(function beforeEach () {
