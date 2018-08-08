@@ -9,6 +9,24 @@ const createNewTodo = ({
   title
 })
 
-module.exports = {
-  createNewTodo
-}
+const updateTodo = ({
+  completed,
+  title = required('title'),
+  todoId = required('todoId')
+}) => todos.update({
+  query: {
+    _id: todoId
+  },
+  update: {
+    title,
+    completed
+  }
+})
+
+const todoService = _ =>
+  Object.create({
+    updateTodo,
+    createNewTodo
+  })
+
+module.exports = todoService
