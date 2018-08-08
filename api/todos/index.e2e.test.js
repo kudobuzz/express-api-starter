@@ -9,8 +9,8 @@ describe('Todos API', () => {
     await tearDown()
   })
 
-  describe('/api/todos/create', () => {
-    const endpoint = '/api/todos/create'
+  describe('POST /api/todos', () => {
+    const endpoint = '/api/todos'
 
     it('should return 201 when todo is created', () => {
       return getRequest()
@@ -31,7 +31,7 @@ describe('Todos API', () => {
     })
   })
 
-  describe('/api/todos/:id', () => {
+  describe('PUT /api/todos/:id', () => {
     let todo
 
     before(async () => {
