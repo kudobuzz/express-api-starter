@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prepush": "npm run lint",
-    "test": "#⚡ Run test \n\t PROCESS_TYPE=api mocha test/setup.js  './{,!(node_modules|coverage|docs)/**/}*.testi.js' --color --no-timeouts",
+    "test": "#⚡ Run test \n\t PROCESS_TYPE=api mocha test/setup.js  './{,!(node_modules|coverage|docs)/**/}*.test.js' --color --no-timeouts",
     "pretest": "npm run lint",
     "watch": "onchange \"**/*.js\" \"**/*.test.js\"  -w -- npm run test",
     "cover": "#Run coverage report \n\t npm-run-all cover:**",
