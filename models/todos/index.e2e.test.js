@@ -28,7 +28,7 @@ describe('Todos Model', () => {
         query: {
           title: todoTitle
         }
-      })).to.eventually.include({ title: todoTitle  })
+      })).to.eventually.include({ title: todoTitle })
     })
   })
 
