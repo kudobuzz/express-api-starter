@@ -1,7 +1,6 @@
 'use strict'
 
 const chai = require('chai')
-const nock = require('nock')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
 const { dbSetup, tearDown } = require('./utils')

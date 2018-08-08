@@ -1,6 +1,5 @@
 'use strict'
 
-
 const { model } = require('./schema')
 const { createBaseModel } = require('@kudobuzz/mongodb-utils')
 
