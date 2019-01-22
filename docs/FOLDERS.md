@@ -33,7 +33,7 @@ This is where configurations are loaded, configurations could be loaded from the
 ## docs
 All the docs for this service should be here.
 
-## Events
+## events
 This is where all the events handlers should be located. Events are very ideal for queue related operations.
 
 ## lib
