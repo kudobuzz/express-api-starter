@@ -40,7 +40,7 @@ This is where all the events handlers should be located. Events are very ideal f
 Contains the wrappers to external libraries.
 
 ## scripts
-This contains all scripts that are run once or periodically, E.g. Migration scripts, indice creators etc.
+This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utitlites or any build configs.
 
 ## services
 This is where all the business code should be located.
