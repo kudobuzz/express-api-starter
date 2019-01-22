@@ -1,14 +1,14 @@
 # Folders
 
 +-- [api/](#api)   
-|  +-- [common/](#common)   
+|  +-- [common/](#api/common)   
 +-- [config/](#config)  
 +-- [docs/](#docs)  
 +-- [events/](#events)  
 +-- [lib/](#lib)  
 +-- [scripts/](#scripts)  
 +-- [services/](#services)  
-|  +-- [models/](#models)   
+|  +-- [models/](#services/models)   
 +-- [workers/](#workers)  
 +-- [.editorconfig](#.editorconfig)  
 +-- [.env.sample](#.env.sample)  
@@ -24,7 +24,7 @@ Contains:
  1. Actions, scripts that interact with the services in [services](#services) folder.
  2. Endpoints, exposing the service to other services.
 
-### common
+### api/common
 This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)).
 
 ## config
@@ -45,7 +45,7 @@ This contains all scripts that are run once or periodically, E.g. Migration scri
 ## services
 This is where all the business code should be located.
 
-### models
+### services/models
 This should contain the schemas
 
 ## workers
