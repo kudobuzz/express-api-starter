@@ -1,14 +1,22 @@
-# Todo
+# Node.js Boilerplate
 
-# Nodejs-api-starter
-A multi process rest api service starter 
+This is the boiler plate that should be used for all Node.js services codebase.
 
-# Overview
-The whole idea around this boilerplate is to help us set up our services easily as wells providing a more consistent structure and workflow across different node.js projects. It contains tools and features as well best practices when developing services at kudobuzz.
+Click [here](docs/FOLDERS.md) to go through details for each folder.
 
-## Features
+## Scripts
+1. `npm run lint`  
+    This runs linting on the service code.
 
+2. `npm run test`  
+    Runs all tests present in the service.
+    Tests **MUST** have `.test.js` extension.
 
-# Getting Started
-## Cloning the repo
+Other scripts can be added as needed.
 
+**Note**:  
+`npm run lint` is automatically run before git push.  
+Also, the code is made pretty (prettify) during commit.
+
+**Commit guidelines:**  
+[Here](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#submit) is a detailed guidline.
