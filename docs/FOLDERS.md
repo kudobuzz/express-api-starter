@@ -49,7 +49,7 @@ This is where all the business code should be located.
 This should contain the schemas
 
 ## workers
-All background logic E.g. cron jobs e.t.c should be located in this folder.
+Should contain anything that needs to run outside of the main process E.g. cron jobs
 
 ## Other files
 These other files include:
@@ -61,7 +61,8 @@ These other files include:
 - #### .env.sample
 
     Has the samples for environment variable.   
-    A `.env` file __must__ be created based on the variables in the _.env.sample_ file.
+    A `.env` file __must__ be created based on the variables in the _.env.sample_ file.  
+    **Note:** `.env` file **should only** be used in development.
 
 - #### .gitignore 
 
