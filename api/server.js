@@ -1,25 +1,25 @@
 'use strict'
+
 const app = require('./app')
 const config = require('../config')
-const db = require('../lib/services/db')()
-const servicesManager = require('../lib/services/manage-services')
+const db = require('../lib/resources/db')()
+const { start } = require('@kudobuzz/resource-manager')
+const log = require('../lib/logger')().child({ type: 'server' })
 
-const log = require('../lib/logger')().child({type: 'server'})
 let server
 
-const startServer = _ => {
-  log.info('Start server on port', config('PORT'))
-  server = app.listen(config('PORT'))
+const onReady = _ => {
+  if (server) return server
+
+  server = app.listen(config('PORT'), _ =>
+    log.info(`Server running on port ${config('PORT')}`))
 }
 
-const stopServer = _ => {
+const onShutDown = _ => {
   if (server) {
-    log.info('Close server on port', config('PORT'))
-    server.close()
+    log.info(`Shutting down server on port ${config('PORT')}`)
+    return server.close()
   }
 }
 
-servicesManager(db)
-  .connect()
-  .on('services:ready', startServer)
-  .on('services:disconnected', stopServer)
+start({ resources: [db], onReady, onShutDown })
