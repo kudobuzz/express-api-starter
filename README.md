@@ -18,4 +18,5 @@ Other scripts can be added as needed.
 `npm run lint` is automatically run before git push.  
 Also, the code is made pretty (prettify) during commit.
 
-**Commit guidelines:**
+**Commit guidelines:**  
+[Here](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#submit) is a detailed guidline.
