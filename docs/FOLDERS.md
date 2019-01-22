@@ -9,6 +9,7 @@
 +-- [scripts/](#scripts)  
 +-- [services/](#services)  
 |  +-- [models/](#services/models)   
++-- [tests/](#tests)    
 +-- [workers/](#workers)  
 +-- [.editorconfig](#.editorconfig)  
 +-- [.env.sample](#.env.sample)  
@@ -44,6 +45,9 @@ This contains all scripts that are run once, E.g. Migration scripts, indice crea
 
 ## services
 This is where all the business code should be located.
+
+## tests
+This contains test configurations.  
 
 ### services/models
 This should contain the schemas
