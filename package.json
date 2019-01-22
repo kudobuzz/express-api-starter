@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prepush": "npm run lint",
-    "test": "#⚡ Run test \n\t node scripts/test",
+    "test": "PROCESS_TYPE=api mocha test/setup.js  './{,!(node_modules|coverage|docs)/**/}*.test.js' --color",
     "pretest": "npm run lint",
     "watch": "onchange \"**/*.js\" \"**/*.test.js\"  -w -- npm run test",
     "cover": "#Run coverage report \n\t npm-run-all cover:**",
@@ -31,18 +31,19 @@
   },
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
+    "@kudobuzz/mongodb-utils": "^1.2.0",
     "body-parser": "1.17.1",
     "bunyan": "1.8.9",
     "cors": "2.8.1",
     "express": "4.15.2",
     "joi": "10.3.1",
-    "mongoose": "4.9.2",
     "morgan": "1.8.1",
     "superagent": "3.5.1"
   },
   "devDependencies": {
     "aglio": "2.3.0",
     "chai": "3.5.0",
+    "chai-as-promised": "^7.1.1",
     "cross-env": "4.0.0",
     "dotenv": "4.0.0",
     "husky": "0.13.3",

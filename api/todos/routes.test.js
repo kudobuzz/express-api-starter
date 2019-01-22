@@ -1,69 +1,56 @@
-  const app = require('../app.js')
-  const request = require('supertest')
+'use strict'
 
-  describe('Todo tests', function () {
-    it('/api/todo/todos should return a json array', function (done) {
-      request(app)
-            .get('/api/todo/todos')
-            .expect(200)
-            .expect('Content-Type', /json/)
-            .expect(function (res) {
-              if (!Array.isArray(res.body)) {
-                throw new Error('did not respond with a json array')
-              }
-            })
-            .end(function () {
-              done()
-            })
-    })
+const { expect } = require('chai')
+const request = require('supertest')
+const app = require('../app')
 
-    it('/api/todo/create to accept a title and return a todo object', function (done) {
-      request(app)
-           .post('/api/todo/create')
-           .send({title: 'some title'})
-           .expect(200)
-           .expect('Content-Type', /json/)
-           .expect(function (res) {
-             if (res.body.title !== 'some title') {
-               throw new Error('todo object in response has wrong title')
-             }
-             if (!(res.body.completed === false)) {
-               throw new Error('todo object created with wrong default')
-             }
+describe('Todo tests', function () {
+  let todo
 
-             if (!(res.body.id)) {
-               throw new Error('missing id in response')
-             }
-           })
-            .end(done)
-    })
-
-    it('/api/todo/todo_id updates the existing todo object', function (done) {
-      let status = true
-      request(app)
-          .put('/api/todo/1234')
-          .send({completed: status})
-          .expect(200)
-          .expect('Content-Type', /json/)
-          .expect(function (res) {
-            if (!res.body.completed === status) {
-              throw new Error(`expected completed status to be ${status} but is ${res.body.completed}`)
-            }
-          })
-          .end(done)
-    })
-
-    it('/api/todo/todo_id returns the existing todo object', function (done) {
-      let todoId = '1234'
-      request(app)
-         .get(`/api/todo/${todoId}`)
-         .expect(200)
-         .expect('Content-Type', /json/)
-         .expect(function (res) {
-           if (res.body.id !== todoId) {
-             throw new Error('recieved wrong todo object')
-           }
-         })
-         .end(done)
-    })
+  it('/api/todo/todos should return a json array', async function () {
+    this.timeout(80000)
+    const response = await request(app).get('/api/todo/todos')
+    const { status } = response
+    expect(status).to.equal(200)
   })
+
+  it('/api/todo/create to accept a title and return a todo object', async function () {
+    this.timeout(80000)
+
+    const response = await request(app)
+      .post('/api/todo/create')
+      .send({ title: 'some title' })
+
+    const { status, body } = response
+    expect(status).to.equal(200)
+    expect(body.title).to.equal('some title')
+    expect(body.completed).to.equal(false)
+    expect(body._id).to.be.a('string')
+
+    todo = body
+  })
+
+  it('/api/todo/todo_id updates the existing todo object', async function () {
+    this.timeout(80000)
+
+    const response = await request(app)
+      .put(`/api/todo/${todo._id}`)
+      .send({ completed: true })
+
+    const { status, body } = response
+    expect(status).to.equal(200)
+    expect(body.completed).to.equal(true)
+  })
+
+  it('/api/todo/todo_id returns the existing todo object', async function () {
+    this.timeout(80000)
+
+    const response = await request(app).get(`/api/todo/${todo._id}`)
+
+    const { status, body } = response
+    expect(status).to.equal(200)
+    expect(body.title).to.equal('some title')
+    expect(body.completed).to.equal(true)
+    expect(body._id).to.eql(todo._id)
+  })
+})

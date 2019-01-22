@@ -1,62 +1,52 @@
+'use strict'
+
 const express = require('express')
 const router = express.Router()
-const Manager = require('../../models/todos/manager.js')
-const todoManager = new Manager()
+const todoManager = require('../../models/todos')()
 
-router.get('/todos', function (req, res) {
-  todoManager.read({query: {}})
-      .then(function (todos) {
-        res.status(200).json(todos)
-      })
-      .catch(function (err) {
-        res.status(500).json({
-          error: err
-        })
-      })
+router.get('/todos', async (req, res) => {
+  try {
+    const todos = await todoManager.read({ query: {} })
+    res.status(200).json(todos)
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
 })
 
-router.post('/create', function (req, res) {
-  let title = req.body.title
-  todoManager.create({draft: {title: title}})
-           .then(function (todo) {
-             res.status(200).json(todo)
-           })
-           .catch(function (err) {
-             console.log(err)
-             res.status(500).json({
-               error: err
-             })
-           })
+router.post('/create', async (req, res) => {
+  const title = req.body.title
+  try {
+    const todo = await todoManager.create({ title: title })
+    res.status(200).json(todo)
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
 })
 
-router.put('/:todo_id', function (req, res) {
-  let options = {
-    query: {_id: req.params.todo_id},
-    update: {$set: req.body}
+router.put('/:todo_id', async (req, res) => {
+  const options = {
+    query: { _id: req.params.todo_id },
+    update: { $set: req.body }
   }
 
-  todoManager.update(options)
-           .then(function (todo) {
-             res.status(200).json(todo)
-           })
-           .catch(function (err) {
-             res.status(500).json({
-               error: err
-             })
-           })
+  try {
+    const updatedTodo = await todoManager.update(options)
+    res.status(200).json(updatedTodo)
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
 })
 
-router.get('/:todo_id', function (req, res) {
+router.get('/:todo_id', async (req, res) => {
   let todoId = req.params.todo_id
-  todoManager.read({query: {_id: todoId}})
-           .then(function (todo) {
-             res.status(200).json(todo)
-           })
-           .catch(function (err) {
-             res.status(500).json({
-               error: err
-             })
-           })
+
+  try {
+    const todo = await todoManager.read({ query: { _id: todoId } })
+
+    res.status(200).json(todo)
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
 })
 
 module.exports = router
