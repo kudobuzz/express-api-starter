@@ -4,10 +4,11 @@
 |  +-- [common/](#common)   
 +-- [config/](#config)  
 +-- [docs/](#docs)  
-+-- [events/](#events)
++-- [events/](#events)  
 +-- [lib/](#lib)  
 +-- [scripts/](#scripts)  
 +-- [services/](#services)  
+|  +-- [models/](#models)   
 +-- [workers/](#workers)  
 +-- [.editorconfig](#.editorconfig)  
 +-- [.env.sample](#.env.sample)  
@@ -44,6 +45,9 @@ This contains all scripts that are run once or periodically, E.g. Migration scri
 ## services
 This is where all the business code should be located.
 
+### models
+This should contain the schemas
+
 ## workers
 All background logic E.g. cron jobs e.t.c should be located in this folder.
 
@@ -67,7 +71,7 @@ These other files include:
 
     This contains `npm`'s global configurations.
 
-- #### CONTRIBUTION.md   
+- #### CONTRIBUTION.md  
 
     Your contribution is welcomed. You can submit a PR with the changes you think might be helpful in this express-api-starter detailing the changes and the reasons.
 
