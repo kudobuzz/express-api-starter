@@ -16,7 +16,8 @@ Other scripts can be added as needed.
 
 **Note**:  
 `npm run lint` is automatically run on staged files before git push.  
-Also, the code is made pretty (by prettier) when files are staged in git.
+All comit messages are linted upon commit.   
+Also, the code is made pretty (by prettier) when files are staged in git.  
 
 **Commit guidelines:**  
 [Here](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#submit) is a detailed guidline.
