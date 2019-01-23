@@ -8,7 +8,8 @@
   },
   "scripts": {
     "prepush": "npm run lint",
-    "lint": "kbscripts lint"
+    "lint": "kbscripts lint",
+    "test": "mocha --recursive **/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   },
   "devDependencies": {
     "@kudobuzz/kbscripts": "0.0.5",
+    "chai": "4.2.0",
+    "mocha": "5.2.0"
   },
   "standard": {
     "env": [
