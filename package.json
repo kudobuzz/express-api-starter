@@ -8,8 +8,7 @@
   },
   "scripts": {
     "prepush": "npm run lint",
-    "lint": "node_modules/.bin/kb-scripts lint",
-    "test": "node_modules/.bin/mocha --recursive -- **/*.test.js"
+    "lint": "kbscripts lint"
   },
   "repository": {
     "type": "git",
@@ -22,19 +21,13 @@
   },
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
-    "@kudobuzz/express-bunyan-logger": "1.1.4",
-    "@kudobuzz/express-joi-validator": "0.0.9",
-    "@kudobuzz/mongodb-utils": "2.1.0",
-    "@kudobuzz/resource-manager": "1.3.0",
     "body-parser": "1.17.1",
     "cors": "2.8.1",
     "express": "4.15.2",
     "mongoose": "5.2.7"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "kb-scripts": "git+https://github.com/kudobuzz/kbscripts.git#fix-npm-bin-link",
-    "mocha": "5.2.0"
+    "@kudobuzz/kbscripts": "0.0.5",
   },
   "standard": {
     "env": [
