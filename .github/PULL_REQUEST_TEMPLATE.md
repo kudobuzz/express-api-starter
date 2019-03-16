@@ -19,20 +19,20 @@
 
 
 #### What does this pr do?
-Add description of pr here
+<!-- Add description of pr here -->
 
 #### How should this be manually tested?
-Add specific steps on how to test this manually
+<!-- Add specific steps on how to test this manually
 1. Step 1
-2. Step 2 etc
+2. Step 2 etc -->
 
 
 ##### Any background context you want to provide?
-Any background context will be appropriate
+<!-- Any background context will be appropriate -->
 
 #### What are the relevant issues?
-#2344
+<!-- #2344 -->
 
 
 #### Screenshots (if appropriate)
-Add any Screenshots here
+<!-- Add any Screenshots here -->
