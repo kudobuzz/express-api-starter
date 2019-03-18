@@ -8,7 +8,7 @@
 +-- [lib/](#lib)  
 +-- [scripts/](#scripts)  
 +-- [services/](#services)  
-|  +-- [models/](#services/models)   
++-- [models/](#models)   
 +-- [tests/](#tests)    
 +-- [workers/](#workers)  
 +-- [.editorconfig](#.editorconfig)  
@@ -24,27 +24,35 @@
 Contains:
  1. Actions, scripts that interact with the services in [services](#services) folder.
  2. Endpoints, exposing the service to other services.
+ 3. Handles the validations and assertions of the requests
 
 ### api/common
 This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)).
 
 ## config
 This is where configurations are loaded, configurations could be loaded from the environment variables either in production or in development based on where the service has been spawned.
+i.e.
+The process.env files is in the config files 
+The configenables you to test when an app starts to test if all the variables are available if not it throws an error hence one can never deploy an app with missing variables.
+
 
 ## docs
 All the docs for this service should be here.
 
 ## events
 This is where all the events handlers should be located. Events are very ideal for queue related operations.
+An event triggers an action 
 
 ## lib
 Contains the wrappers to external libraries.
+
 
 ## scripts
 This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utitlites or any build configs.
 
 ## services
-This is where all the business code should be located.
+This is where all the business code should be located.It contains the business logic and application specific logic as well
+for example encrypting and decrypting a token as well as communication with the models
 
 ## tests
 This contains test configurations.  
@@ -52,9 +60,11 @@ This contains test configurations.
 ### services/models
 This should contain the schemas
 
+
 ## workers
 Should contain anything that needs to run outside of the main process E.g. cron jobs
-
+The Workers  handle things like scheduling 
+i.ee
 ## Other files
 These other files include:
 
