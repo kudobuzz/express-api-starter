@@ -33,11 +33,13 @@ Here you also have middlewares like the express middleware that has access to th
 
 ## config
 This is where configurations are loaded, configurations could be loaded from the environment variables either in production or in development based on where the service has been spawned.
+configs are grouped into components which allows you to manouver when you require the use of a service for example the mongodb url.
+
 
 i.e.
 
 The process.env files is in the config files 
- when an app starts it enables you to test if all the variables are available if not it throws an error hence one can never deploy an app with missing variables.
+ when an app starts it enables you to test if all the variables are available if not it throws an error hence one can never deploy an app with missing variables. [api](#api)
 
 
 ## docs
