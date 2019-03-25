@@ -4,17 +4,22 @@ This is a simple web api to allow you farmilirise with the APIs
 
 ## API endpoints 
 
+
+| ACTION        | HTTP  |    ENDPOINTS    |
+|---------------|-------|-----------------|
+|get all todo   | GET   |    api/todo     |
+|get todo: id   | GET   |   /api/todo/id  |
+|post a todo    | POST  |   /api/todo     |
+
 - Get TODO's:
-
-
 GET /todo
 ```JavaScript
-// get all todos
- app.get('/api/v1/todos', (req, res) => {
+// get all todo
+ app.get('/api/todo', (req, res) => {
   res.status(200).send({
     success: 'true',
-    message: 'todos retrieved successfully',
-    todos: db
+    message: 'todo retrieved successfully',
+    todo: db
   })
 });
 ```
@@ -25,7 +30,8 @@ GET /todo/id
 This get a single to do  by the id
 
 ```JavaScript 
-app.get('/api/v1/todos/:id', (req, res) => {
+//get todo by id 
+app.get('/api/todo/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
   db.map((todo) => {
     if (todo.id === id) {
@@ -42,24 +48,13 @@ app.get('/api/v1/todos/:id', (req, res) => {
 POST /todo
 this creates an endpoint to create a to do 
 ```JavaScript
-app.post('/api/v1/todos', (req, res) => {
+app.post('/api/v1/todo', (req, res) => {
   if(!req.body.title) {
     return res.status(400).send({
       success: 'false',
       message: 'title is required'
     });
 ```
-
-- Update TODO with todoid:
-PUT /todo/todoid
-
-TODO's are sent and received in JSON using the following format:
-
-{  
-    "id": 42,  
-    "name": "Get the Name",  
-    "status": "done"  
-}  
 
 
 
