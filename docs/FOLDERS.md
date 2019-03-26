@@ -1,4 +1,4 @@
-# Folders
+   # Folders
 
 +-- [api/](#api)   
 |  +-- [common/](#api/common)   
@@ -8,7 +8,7 @@
 +-- [lib/](#lib)  
 +-- [scripts/](#scripts)  
 +-- [services/](#services)  
-|  +-- [models/](#services/models)   
++-- [models/](#models)   
 +-- [tests/](#tests)    
 +-- [workers/](#workers)  
 +-- [.editorconfig](#.editorconfig)  
@@ -21,39 +21,67 @@
 +-- [README.md](#README.md)
 
 ## api
-Contains:
- 1. Actions, scripts that interact with the services in [services](#services) folder.
- 2. Endpoints, exposing the service to other services.
+This basically contains code related to the api only. This include the api server, request validations,
+express middlewares and controllers. 
+The only interactions to any of the other components is to [services](#services). The whole idea is to keep the controllers as thin as possible so that business logic can be reused.
 
 ### api/common
-This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)).
+This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)). This usually includes shared request schemas, errors, middlewares  ..
+
+
 
 ## config
-This is where configurations are loaded, configurations could be loaded from the environment variables either in production or in development based on where the service has been spawned.
+Configs contains all env variables for the different processes involved, for example it will contain for the api as well  as individual processes in the workers too. 
+One thing we encourage is that , env variables should be properly validaited at startup time. 
+
+### config/components
+Components allows use to compose different configs into one config for a specific process type. By grouping configs into components it prevents having very large files of configs
+
 
 ## docs
 All the docs for this service should be here.
 
+### docs/api.yaml
+All api docs can go in here 
+
+### docs/webhooks.yaml 
+All webhook docs can go in here if you need one
+
 ## events
-This is where all the events handlers should be located. Events are very ideal for queue related operations.
+This is where all the events handlers should be located.
+
 
 ## lib
-Contains the wrappers to external libraries.
+Contains the wrappers to external libraries and utilities.
+These are the helpful functions that accelerate the workflow and are often offered as packages and can be installed with npm.
+
 
 ## scripts
-This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utitlites or any build configs.
+This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utilites or any build configs.
 
 ## services
-This is where all the business code should be located.
+This is where all the business logic code should be located, usually grouped into features.
 
 ## tests
-This contains test configurations.  
+Here we usually have utilities we will need for test. Most test are close to their individual files
 
-### services/models
-This should contain the schemas
+### test/setup.js
+Contains things that should probably run b4 actual test, lik
+
+### test/utils.js
+Utitlies for test
+
+- test/fixtures/
+This is a fixed state to allow the app  to be tested, this enables you to also clean up the code.
+
+## models
+This should contain the schemas ,it also contains all the details for the app to operate efficiently 
+This could be basic data required when changing states , when tasks are completesd succesfully.
+
 
 ## workers
-Should contain anything that needs to run outside of the main process E.g. cron jobs
+Should contain anything that needs to run outside of the main process E.g. cron jobs used to run scheduled tasks
+
 
 ## Other files
 These other files include:
@@ -84,6 +112,11 @@ These other files include:
 
     Contains docker related [settings](https://docs.docker.com/)
 
+- ### services.json
+    
+    Pm2 config to make it easy to setup all processes
+    
+ 
 - #### package.json   
 
     Has all npm/yarn related stuff. Dependancies, run scripts E.t.c, this file will be created automatically when `npm init` or `yarn init` is run during the initialization of the project.
