@@ -1,81 +1,159 @@
 openapi: 3.0.0
+
 info:
-  version: 'v1'
-  title: 'A simple API introduction '
+  version: 1.0.0
+  title: 'simple to do api '
+  description: 'A simple API for the boilerplate'
+
 schemes:
   http
   https
-  
+
 paths:
-  /todos/{id}:
+  /todos/{todo_id}:
     get:
-      x-operation-name: findTodoById
-      tags:
-        - Todos
-      responses:
-        '200':
-          description: Todo model instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/models/todo'
+      summary: retrieves the todo by id
+      description:
       parameters:
         - name: id
           in: path
           schema:
             type: number
           required: true
-        - name: items
-          in: query
-          schema:
-            type: boolean
-  /todos:
-    post:
-      x-operation-name: createTodo
-      tags:
-        - Todos
-      responses:
-        '201':
-          description: todos created
-        '400':
-          description: 'invalid input, object invalid'
-        '409':
-          description: an existing todos already exists
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/models/todo'
-    get:
-      x-operation-name: findTodos
-      tags:
-        - Todos
       responses:
         '200':
-          description: Array of Todo model instances
-          content:
+          description: Todo model instance
+          examples:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/models/todo'
+             {
+                "success": "true",
+                "message":  "todos retrieved successfully",
+                "todos": [
+                {
+                  "id": 2,
+                  "title" : "test get again ",
+                  "desription" :  "go test the get twice"
+                }
+                ]
+              }
+            schema:
+                $ref: '#/models/todo'
+                
         '400':
-          description: bad input parameter
+          description: 'invalid input, object invalid'
+          examples:
+            application/json:
+              {
+                "error": {
+                  "message": "invalid input"
+                }
+              }  
+          schema:
+            $ref: '#/models/errorObject'
+        '404':
+          description: Error the provided todoid is not found.
+          examples:
+              application/json:
+                {
+                  "error": {
+                    "message": "todos with id <todo:id> was not found."
+                  }
+                }
+          schema:
+              $ref: '#/models/errorObject'
+/todos:
+    post:
+      summary: Creates todos 
+      description: Used to create the todos 
+      produces: 
+          - application/json
       parameters:
+        - name: profile
+          description: An object containing all the required details
+          in: body
+          schema:
+            $ref: '#/models/todo'
+    responses:
+        '201':
+          description: todos created
+          examples:
+          application/json:
+            {
+                "success": "true",
+                "message":  "todos added successfully",
+                "todos": [
+                {
+                  "id": 3,
+                  "title" : "added new todo",
+                  "desription" :  "go test the post",
+                  "created_by":"2019-02-05T06:51:36.749Z"
+                }
+                ]
+
+            }
+          schema:
+             $ref: '#/definitions/todosobjectinDB'
+        '400':
+          description: 'invalid input, object invalid'
+          examples:
+            application/json:
+              {
+                "error": {
+                  "message": "invalid input"
+                }
+              }
+          schema:
+             $ref: '#/definitions/errorsObject'
+
+
+    get:
+     summary: Retrieves todos details
+     description: provides all the required todos that have been created 
+     parameters:
         - name: filter
           in: query
-          style: deepObject
-          explode: true
-          schema:
-            properties:
-              where:
-                type: object
-              fields:
-                type: object
-              offset:
-                type: integer
-                minimum: 0
+          required: true 
+          type: string 
+     responses:
+        '200':
+          description: Array of Todo model instances
+          examples:
+            application/json:
+              schema:
+                $ref: '#/models/todo'
+        examples:
+            application/json:
+                  {
+                    "success": "true",
+                    "message":  "todos retrieved successfully",
+                    "todos": [
+                    {
+                      "id": 1,
+                      "title" : "test get",
+                      "desription" :  "go test the get"
+                    },
+                    {
+                      "id": 2,
+                      "title" : "test get again ",
+                      "desription" :  "go test the get twice",
+                      "created_by":"2019-02-05T06:51:36.749Z"
+                    }
+                    ]
 
+                  }
+        '400':
+          description: bad input parameter
+          examples:
+            application/json:
+                {
+                  "error": {
+                    "message": "invalid input"
+                  }
+                }
+            schema:
+              $ref: '#/definitions/errorsObject'
+   
+definitions:
 servers:
   - url: 'http://api.kudobuzz.com'
 
@@ -87,4 +165,12 @@ models:
         type: number
       title:
         type: string
-    
+errorObject:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          message:
+            type: string
+            
