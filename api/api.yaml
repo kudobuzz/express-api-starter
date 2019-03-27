@@ -1,61 +1,90 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
-  title: A Todo list application
-  version: 1.0.0
-
+  version: 'v1'
+  title: 'A simple API introduction '
 schemes:
-- http
-- https
+  http
+  https
+  
 paths:
-  /:
+  /todos/{id}:
     get:
+      x-operation-name: findTodoById
       tags:
-        - todos
-      operationId: findTodos
-      parameters:
-        - name: since
-          in: query
-          type: integer
-          format: int64
-        - name: limit
-          in: query
-          type: integer
-          format: int32
-          default: 20
+        - Todos
       responses:
-        200:
-          description: list the todo operations
+        '200':
+          description: Todo model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/models/todo'
+      parameters:
+        - name: id
+          in: path
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/item"
-        default:
-          description: generic error response
+            type: number
+          required: true
+        - name: items
+          in: query
           schema:
-            $ref: "#/definitions/error"
-  /{id}:
-    parameters:
-      - type: integer
-        format: int64
-        name: id
-        in: path
-        required: true
+            type: boolean
+  /todos:
     post:
+      x-operation-name: createTodo
       tags:
-        - todos
-      operationId: addOne
-      parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: "#/definitions/item"
+        - Todos
       responses:
-        201:
-          description: Created
+        '201':
+          description: todos created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing todos already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/todo'
+    get:
+      x-operation-name: findTodos
+      tags:
+        - Todos
+      responses:
+        '200':
+          description: Array of Todo model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/models/todo'
+        '400':
+          description: bad input parameter
+      parameters:
+        - name: filter
+          in: query
+          style: deepObject
+          explode: true
           schema:
-            $ref: "#/definitions/item"
-        default:
-          description: error
-          schema:
-            $ref: "#/definitions/error"
- 
+            properties:
+              where:
+                type: object
+              fields:
+                type: object
+              offset:
+                type: integer
+                minimum: 0
+
+servers:
+  - url: 'http://api.kudobuzz.com'
+
+models:
+  todo:
+    title: Todo
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+    
