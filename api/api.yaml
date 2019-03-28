@@ -11,33 +11,36 @@ schemes:
 
 paths:
   /todos/{todo_id}:
-    get:
-      summary: retrieves the todo by id
-      description:
+    'get':
+      summary: retrieves the todos by id
       parameters:
-        - name: id
+        - name: todo_id
           in: path
-          schema:
-            type: number
+          type: string 
           required: true
+        - name: todos
+          description: an object containing the field that need to be acquired
       responses:
         '200':
           description: Todo model instance
           examples:
             application/json:
-             {
+            {
+               {
                 "success": "true",
-                "message":  "todos retrieved successfully",
+                "message":  "todos added successfully",
                 "todos": [
-                {
-                  "id": 2,
-                  "title" : "test get again ",
-                  "desription" :  "go test the get twice"
-                }
+                    {
+                      "id": 2,
+                      "title" : "added new todos",
+                      "desription" :  "go test the post",
+                      "created_by": "2019-02-05T06:51:36.749Z"
+                    }
                 ]
-              }
-            schema:
-                $ref: '#/models/todo'
+               }
+            }
+          schema:
+                $ref: '#/definitions/todosObjecttinDB'
                 
         '400':
           description: 'invalid input, object invalid'
@@ -49,20 +52,20 @@ paths:
                 }
               }  
           schema:
-            $ref: '#/models/errorObject'
+            $ref: '#/definitions/errorObject'
         '404':
           description: Error the provided todoid is not found.
           examples:
               application/json:
                 {
                   "error": {
-                    "message": "todos with id <todo:id> was not found."
+                    "message": "todos with id <todos:id> was not found."
                   }
                 }
           schema:
-              $ref: '#/models/errorObject'
+              $ref: '#/definitions/errorObject'
 /todos:
-    post:
+    'post':
       summary: Creates todos 
       description: Used to create the todos 
       produces: 
@@ -72,25 +75,28 @@ paths:
           description: An object containing all the required details
           in: body
           schema:
-            $ref: '#/models/todo'
+            $ref: '#/definitions/todosObject'
     responses:
         '201':
           description: todos created
           examples:
           application/json:
-            {
+          {
+            data: {
                 "success": "true",
-                "message":  "todos added successfully",
+                "message":  "todos created successfully",
                 "todos": [
                 {
                   "id": 3,
-                  "title" : "added new todo",
+                  "title" : "added new todos",
                   "desription" :  "go test the post",
-                  "created_by":"2019-02-05T06:51:36.749Z"
+                  "created_by": "2019-02-05T06:51:36.749Z"
                 }
                 ]
 
             }
+          }
+           
           schema:
              $ref: '#/definitions/todosobjectinDB'
         '400':
@@ -106,7 +112,7 @@ paths:
              $ref: '#/definitions/errorsObject'
 
 
-    get:
+    'get':
      summary: Retrieves todos details
      description: provides all the required todos that have been created 
      parameters:
@@ -120,10 +126,11 @@ paths:
           examples:
             application/json:
               schema:
-                $ref: '#/models/todo'
+                $ref: '#/definitions/todosObjectinDB '
         examples:
             application/json:
-                  {
+            {
+              data: {
                     "success": "true",
                     "message":  "todos retrieved successfully",
                     "todos": [
@@ -136,11 +143,13 @@ paths:
                       "id": 2,
                       "title" : "test get again ",
                       "desription" :  "go test the get twice",
-                      "created_by":"2019-02-05T06:51:36.749Z"
+                      "created_by": "2019-02-05T06:51:36.749Z"
                     }
                     ]
 
                   }
+            }
+                 
         '400':
           description: bad input parameter
           examples:
@@ -152,19 +161,42 @@ paths:
                 }
             schema:
               $ref: '#/definitions/errorsObject'
-   
-definitions:
-servers:
-  - url: 'http://api.kudobuzz.com'
 
-models:
-  todo:
-    title: Todo
+definitions:
+  todosObjectinDB:
+    type: object
     properties:
-      id:
-        type: number
-      title:
-        type: string
+      data:
+          required:
+             - todo_id 
+             - title
+             - created_at 
+             - updated_at
+          properties:
+            id:
+              type: string 
+              description: MongoDb uniqueID identifying the todos
+            title: 
+              type: string
+              description: description of the todos
+            created_at:
+              type: string
+              description: Time when this todos was created
+            updated_at:
+              type: string
+              description: Last time this todos was updated
+    
+  todosObject:
+    type: object
+    properties:
+      data:
+        properties:
+           id:
+              type: string 
+              description: MongoDb uniqueID identifying the todos
+            title: 
+              type: string 
+              description: contains the description of the todos
 errorObject:
     type: object
     properties:
@@ -173,4 +205,5 @@ errorObject:
         properties:
           message:
             type: string
-            
+host: localhost
+basePath: /api/v1
