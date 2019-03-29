@@ -1,0 +1,209 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: 'simple to do api '
+  description: 'A simple API for the boilerplate'
+
+schemes:
+  http
+  https
+
+paths:
+  /todos/{todo_id}:
+    'get':
+      summary: retrieves the todos by id
+      parameters:
+        - name: todo_id
+          in: path
+          type: string 
+          required: true
+        - name: todos
+          description: an object containing the field that need to be acquired
+      responses:
+        '200':
+          description: Todo model instance
+          examples:
+            application/json:
+            {
+               {
+                "success": "true",
+                "message":  "todos added successfully",
+                "todos": [
+                    {
+                      "id": 2,
+                      "title" : "added new todos",
+                      "desription" :  "go test the post",
+                      "created_by": "2019-02-05T06:51:36.749Z"
+                    }
+                ]
+               }
+            }
+          schema:
+                $ref: '#/definitions/todosObjecttinDB'
+                
+        '400':
+          description: 'invalid input, object invalid'
+          examples:
+            application/json:
+              {
+                "error": {
+                  "message": "invalid input"
+                }
+              }  
+          schema:
+            $ref: '#/definitions/errorObject'
+        '404':
+          description: Error the provided todoid is not found.
+          examples:
+              application/json:
+                {
+                  "error": {
+                    "message": "todos with id <todos:id> was not found."
+                  }
+                }
+          schema:
+              $ref: '#/definitions/errorObject'
+/todos:
+    'post':
+      summary: Creates todos 
+      description: Used to create the todos 
+      produces: 
+          - application/json
+      parameters:
+        - name: profile
+          description: An object containing all the required details
+          in: body
+          schema:
+            $ref: '#/definitions/todosObject'
+    responses:
+        '201':
+          description: todos created
+          examples:
+          application/json:
+          {
+            data: {
+                "success": "true",
+                "message":  "todos created successfully",
+                "todos": [
+                {
+                  "id": 3,
+                  "title" : "added new todos",
+                  "desription" :  "go test the post",
+                  "created_by": "2019-02-05T06:51:36.749Z"
+                }
+                ]
+
+            }
+          }
+           
+          schema:
+             $ref: '#/definitions/todosobjectinDB'
+        '400':
+          description: 'invalid input, object invalid'
+          examples:
+            application/json:
+              {
+                "error": {
+                  "message": "invalid input"
+                }
+              }
+          schema:
+             $ref: '#/definitions/errorsObject'
+
+
+    'get':
+     summary: Retrieves todos details
+     description: provides all the required todos that have been created 
+     parameters:
+        - name: filter
+          in: query
+          required: true 
+          type: string 
+     responses:
+        '200':
+          description: Array of Todo model instances
+          examples:
+            application/json:
+              schema:
+                $ref: '#/definitions/todosObjectinDB '
+        examples:
+            application/json:
+            {
+              data: {
+                    "success": "true",
+                    "message":  "todos retrieved successfully",
+                    "todos": [
+                    {
+                      "id": 1,
+                      "title" : "test get",
+                      "desription" :  "go test the get"
+                    },
+                    {
+                      "id": 2,
+                      "title" : "test get again ",
+                      "desription" :  "go test the get twice",
+                      "created_by": "2019-02-05T06:51:36.749Z"
+                    }
+                    ]
+
+                  }
+            }
+                 
+        '400':
+          description: bad input parameter
+          examples:
+            application/json:
+                {
+                  "error": {
+                    "message": "invalid input"
+                  }
+                }
+            schema:
+              $ref: '#/definitions/errorsObject'
+
+definitions:
+  todosObjectinDB:
+    type: object
+    properties:
+      data:
+          required:
+             - todo_id 
+             - title
+             - created_at 
+             - updated_at
+          properties:
+            id:
+              type: string 
+              description: MongoDb uniqueID identifying the todos
+            title: 
+              type: string
+              description: description of the todos
+            created_at:
+              type: string
+              description: Time when this todos was created
+            updated_at:
+              type: string
+              description: Last time this todos was updated
+    
+  todosObject:
+    type: object
+    properties:
+      data:
+        properties:
+           id:
+              type: string 
+              description: MongoDb uniqueID identifying the todos
+            title: 
+              type: string 
+              description: contains the description of the todos
+errorObject:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          message:
+            type: string
+host: localhost
+basePath: /api/v1
