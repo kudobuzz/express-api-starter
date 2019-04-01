@@ -10,4 +10,4 @@ function healthRouter () {
   return router
 }
 
-module.exports = healthRouters
+module.exports = healthRouter
