@@ -26,14 +26,13 @@ paths:
           examples:
             application/json:
             {
-               {
-                "success": "true",
-                "message":  "todos added successfully",
+               data: {
                 "todos": [
                     {
-                      "id": 2,
+                      "id": 3,
                       "title" : "added new todos",
-                      "desription" :  "go test the post",
+                      "note" :  "go test the post",
+                      "due_date" :  "2019-02-05T06:51:36.749Z"
                       "created_by": "2019-02-05T06:51:36.749Z"
                     }
                 ]
@@ -71,7 +70,7 @@ paths:
       produces: 
           - application/json
       parameters:
-        - name: profile
+        - name: todos
           description: An object containing all the required details
           in: body
           schema:
@@ -83,13 +82,12 @@ paths:
           application/json:
           {
             data: {
-                "success": "true",
-                "message":  "todos created successfully",
                 "todos": [
                 {
                   "id": 3,
                   "title" : "added new todos",
-                  "desription" :  "go test the post",
+                  "note" :  "go test the post",
+                  "due_date" :  "2019-02-05T06:51:36.749Z"
                   "created_by": "2019-02-05T06:51:36.749Z"
                 }
                 ]
@@ -116,7 +114,7 @@ paths:
      summary: Retrieves todos details
      description: provides all the required todos that have been created 
      parameters:
-        - name: filter
+        - name: todos
           in: query
           required: true 
           type: string 
@@ -131,8 +129,6 @@ paths:
             application/json:
             {
               data: {
-                    "success": "true",
-                    "message":  "todos retrieved successfully",
                     "todos": [
                     {
                       "id": 1,
@@ -145,10 +141,11 @@ paths:
                       "desription" :  "go test the get twice",
                       "created_by": "2019-02-05T06:51:36.749Z"
                     }
-                    ]
-
-                  }
-            }
+                    ],
+                    metadata: {
+                      count: 2
+                    }
+           }
                  
         '400':
           description: bad input parameter
@@ -170,6 +167,8 @@ definitions:
           required:
              - todo_id 
              - title
+             - note 
+             - due_date
              - created_at 
              - updated_at
           properties:
@@ -179,6 +178,12 @@ definitions:
             title: 
               type: string
               description: description of the todos
+            note:
+              type: string
+              description: Time when this todos was created
+            due_date:
+              type: string
+              description: Time when this todos was created
             created_at:
               type: string
               description: Time when this todos was created
@@ -197,6 +202,10 @@ definitions:
             title: 
               type: string 
               description: contains the description of the todos
+            note: 
+              type: string 
+              description: contains the description of the todos
+
 errorObject:
     type: object
     properties:
