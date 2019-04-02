@@ -6,7 +6,6 @@ info:
   description: 'A simple health check for the boilerplate'
 
 
-
 path:
 todos/health:
     'get':
@@ -23,9 +22,7 @@ todos/health:
                 "database": "connection ok"
                   
              }
-          schema:
-                $ref: '#/definitions/todosObjecttinDB'
-                
+                  
         '503':
           description: 'health check failed '
           examples:
@@ -36,19 +33,6 @@ todos/health:
                   "database": "connection refused"
                   }
                 }
-          schema:
-            $ref: '#/definitions/errorObject
-
-definitions:
-  
-errorObject:
-    type: object
-    properties:
-      error:
-        type: object
-        properties:
-          message:
-            type: string
 
 host: localhost
 basePath: /api/v1
