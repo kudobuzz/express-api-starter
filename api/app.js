@@ -7,11 +7,11 @@ const v1Router = require('./v1')
 const app = express
 
 
-function createApp(){
+function createApp() {
     app
         .use(bodyParser.json())
-        .use('v1',v1Router)
+        .use('v1', v1Router)
 
-        return app
-    }
+    return app
+}
 module.exports = createApp
