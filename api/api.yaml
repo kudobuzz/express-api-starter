@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: "3.0.0"
 
 info:
   version: 1.0.0
@@ -6,9 +6,9 @@ info:
   description: 'A simple API for the boilerplate'
 
 schemes:
-  http
-  https
-
+  - https
+  - http
+  
 paths:
   /todos:
     get:
@@ -25,7 +25,11 @@ paths:
           examples:
             application/json:
               {
-                "data":{
+                "metadata":{
+                  "count":12
+                },
+                "data": [
+                {
                   "id": 1,
                   "title" : "to do list",
                   "tags" :[
@@ -47,7 +51,8 @@ paths:
                   "updated_at": "2019-06-05T06:51:36.749Z"
                         
                 }
-              }
+              ]
+            }
             schema:
               $ref: '#/definitions/todosObjecttinDB'
                   
@@ -60,8 +65,8 @@ paths:
                     "message": "todos input is not valid"
                   }
                 }
-              schema:
-                $ref: '#/definitions/errorsObject'
+            schema:
+              $ref: '#/definitions/errorsObject'
     post:
       summary: Creates todos 
       description: Used to create the todos 
@@ -90,7 +95,7 @@ paths:
               }
           
           schema:
-            $ref: '#/definitions/todosobjectinDB'
+            $ref: '#/definitions/todosObjectinDB'
         400:
           description: Error the provided todoid is not found
           examples:
@@ -113,28 +118,28 @@ paths:
         - name: todos
       description: an object containing the field that need to be acquired
       responses:
-        '200':
+        200:
           description: Todo model instance
           examples:
             application/json:
-            {
-               "data": {
-                 "id": 3,
-                 "title" : "added new todos",
-                 "note" :  "go test the post",
-                 "tags" :[
-                    {"id": "125", "name": "Check for table"},
-                    {"id": "834", "name": "Look for plants"}
-                  ],
-                 "due_date" :  "2019-02-05T06:51:36.749Z",
-                 "created_by": "2019-02-05T06:51:36.749Z",
-                 "updated_at": "2019-04-05T06:51:36.749Z"
-               }
-            }
+              {
+                 "data": {
+                   "id": 3,
+                   "title" : "added new todos",
+                   "note" :  "go test the post",
+                   "tags" :[
+                      {"id": "125", "name": "Check for table"},
+                      {"id": "834", "name": "Look for plants"}
+                    ],
+                   "due_date" :  "2019-02-05T06:51:36.749Z",
+                   "created_by": "2019-02-05T06:51:36.749Z",
+                   "updated_at": "2019-04-05T06:51:36.749Z"
+                 }
+              }
           schema:
             $ref: '#/definitions/todosObjecttinDB'
                 
-        '400':
+        400:
           description: Error the input provided is not valid 
           examples:
             application/json:
@@ -156,7 +161,33 @@ paths:
               }
           schema:
               $ref: '#/definitions/errorObject'
-
+              
+  todos/health:
+      'get':
+        summary: checks that the api is working 
+        description: asserts that the api is working as exp
+        responses:
+          '200':
+            description: the health check is passed
+            examples:
+              application/json:
+               {
+                  "status": "Service available",
+                  "timestamp": "2018-01-17T03:36:48Z",
+                  "database": "connection ok"    
+               }
+                    
+          '503':
+            description: 'health check failed '
+            examples:
+              application/json:
+                {
+                  "status": "Service Unavailable",
+                  "errors": {
+                    "database": "connection refused"
+                    },
+                  }
+                  
 definitions:
   todosObjectinDB:
     type: object
