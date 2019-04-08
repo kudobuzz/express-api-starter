@@ -27,7 +27,7 @@
     "mongoose": "5.2.7"
   },
   "devDependencies": {
-    "@kudobuzz/kbscripts": "0.0.5",
+    "@kudobuzz/kbscripts": "0.0.5"
   },
   "standard": {
     "env": [
