@@ -1,6 +1,6 @@
 'use strict'
 
-const { api } = require('../../../tests/utils')
+const {api, dbSetup, tearDown} = require('../../tests/utils')
 const delay = require('util').promisify(setTimeout)
 
 describe('Health',() => {
