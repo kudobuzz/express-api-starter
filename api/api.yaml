@@ -13,7 +13,7 @@ paths:
   /todos:
     get:
       summary: Retrieves todos details
-      description: provides all the required todos that have been created 
+      description: provides all the todos that have been created 
       parameters:
         - name: todo
           in: query
