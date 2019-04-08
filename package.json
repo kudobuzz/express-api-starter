@@ -8,7 +8,8 @@
   },
   "scripts": {
     "prepush": "npm run lint",
-    "lint": "kbscripts lint"
+    "lint": "kbscripts lint",
+    "test": "kbscripts tests"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,13 @@
   },
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
-    "body-parser": "1.17.1",
+    "@kudobuzz/kbscripts": "0.0.12",
+    "body-parser": "1.18.3",
     "cors": "2.8.1",
-    "express": "4.15.2",
-    "mongoose": "5.2.7"
+    "express": "4.16.4",
+    "mongoose": "5.4.22"
   },
-  "devDependencies": {
-    "@kudobuzz/kbscripts": "0.0.5",
-  },
+  "devDependencies": {},
   "standard": {
     "env": [
       "mocha"
