@@ -21,13 +21,15 @@
   },
   "homepage": "https://github.com/kudobuzz/nodejs-api-starter#readme",
   "dependencies": {
-    "body-parser": "1.17.1",
+    "body-parser": "1.18.3",
     "cors": "2.8.1",
-    "express": "4.15.2",
-    "mongoose": "5.2.7"
+    "express": "4.16.4",
+    "mocha": "6.1.2",
+    "mongoose": "5.5.0"
   },
   "devDependencies": {
-    "@kudobuzz/kbscripts": "0.0.5"
+    "@kudobuzz/kbscripts": "0.0.5",
+    "chai": "4.2.0"
   },
   "standard": {
     "env": [
