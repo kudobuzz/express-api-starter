@@ -25,7 +25,8 @@
     "cors": "2.8.1",
     "express": "4.16.4",
     "mocha": "6.1.2",
-    "mongoose": "5.5.0"
+    "mongoose": "5.5.0",
+    "supertest": "4.0.2"
   },
   "devDependencies": {
     "@kudobuzz/kbscripts": "0.0.5",
