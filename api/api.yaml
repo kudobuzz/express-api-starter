@@ -13,7 +13,7 @@ paths:
   /todos:
     get:
       summary: Retrieves todos details
-      description: provides all the todos that have been created 
+      description: provides all the required todos that have been created 
       parameters:
         - name: todo
           in: query
@@ -62,7 +62,7 @@ paths:
               application/json:
                 {
                   "error": {
-                    "message": "todos input is not valid"
+                    "message": "todos is not a valid todo parameter "
                   }
                 }
             schema:
@@ -97,12 +97,12 @@ paths:
           schema:
             $ref: '#/definitions/todosObjectinDB'
         400:
-          description: Error the provided todoid is not found
+          description: Error the provided todoid cannot found
           examples:
             application/json:
               {
                 "error": {
-                  "message": "todos with id is invalid"
+                  "message": "todos with id <todos:id> cannot found"
                 }
               }
           schema:
@@ -145,7 +145,7 @@ paths:
             application/json:
               {
                 "error": {
-                  "message": "todos with id is invalid"
+                  "message": "todos with id <todos:id> is not a valid number"
                 }
               }  
           schema:
