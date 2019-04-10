@@ -57,12 +57,12 @@ paths:
               $ref: '#/definitions/todosObjecttinDB'
                   
           400:
-            description: Error provided todo parameter wrong
+            description: Error provided todo fails to match the required pattern
             examples:
               application/json:
                 {
                   "error": {
-                    "message": "todos provided is not a valid todo parameter "
+                    "message": "provided todo fails to match the required pattern"
                   }
                 }
             schema:
