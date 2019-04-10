@@ -45,5 +45,4 @@ describe('Common Component config', function () {
 
     expect(require(module).NODE_ENV).to.equal(process.env.NODE_ENV)
   })
-
 })
