@@ -37,7 +37,7 @@ paths:
                     {"id": "834", "name": "Look for plants"}
                   ],
                   "description" :  "go test the get",
-                  "created_by": "2019-02-05T06:51:36.749Z",
+                  "created_at": "2019-02-05T06:51:36.749Z",
                   "updated_at": "2019-04-05T06:51:36.749Z"
                 },
                 {
@@ -47,7 +47,7 @@ paths:
                   "tags" :[
                     {"id": "125", "name": "Check for table 1"}
                   ],
-                  "created_by": "2019-03-05T06:51:36.749Z",
+                  "created_at": "2019-03-05T06:51:36.749Z",
                   "updated_at": "2019-06-05T06:51:36.749Z"
                         
                 }
@@ -62,7 +62,7 @@ paths:
               application/json:
                 {
                   "error": {
-                    "message": "todos is not a valid todo parameter "
+                    "message": "todos provided is not a valid todo parameter "
                   }
                 }
             schema:
@@ -89,7 +89,7 @@ paths:
                       "title" : "added new todos",
                       "note" :  "go test the post",
                       "due_date" :  "2019-02-05T06:51:36.749Z",
-                      "created_by": "2019-02-05T06:51:36.749Z",
+                      "created_at": "2019-02-05T06:51:36.749Z",
                       "updated_at": "2019-04-05T06:51:36.749Z"
                   }
               }
@@ -132,7 +132,7 @@ paths:
                       {"id": "834", "name": "Look for plants"}
                     ],
                    "due_date" :  "2019-02-05T06:51:36.749Z",
-                   "created_by": "2019-02-05T06:51:36.749Z",
+                   "created_at": "2019-02-05T06:51:36.749Z",
                    "updated_at": "2019-04-05T06:51:36.749Z"
                  }
               }
