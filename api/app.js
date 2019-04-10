@@ -3,8 +3,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const v1Router = require('./v1')
-const app = express
+const v1Router = require('./v1')()
+const app = express()
 
 function createApp () {
   app

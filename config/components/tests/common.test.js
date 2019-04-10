@@ -8,6 +8,7 @@ describe('Common Component config', function () {
   const module = '../common.js'
 
   beforeEach(async () => {
+    utils.deleteRequireCache(require.resolve(module))
     process.env = {
       SERVICE_NAME: 'todos',
       NODE_ENV: 'development'
