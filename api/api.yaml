@@ -97,12 +97,12 @@ paths:
           schema:
             $ref: '#/definitions/todosObjectinDB'
         400:
-          description: Error the provided todoid cannot found
+          description: Error the field is not provided
           examples:
             application/json:
               {
                 "error": {
-                  "message": "todos with id <todos:id> cannot found"
+                  "message": todo field is required or check field format provided  
                 }
               }
           schema:
@@ -151,7 +151,7 @@ paths:
           schema:
             $ref: '#/definitions/errorObject'
         404:
-          description: Error the provided todoid is not found.
+          description: Error the provided todo_id is not found.
           examples:
             application/json:
               {
