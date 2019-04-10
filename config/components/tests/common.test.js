@@ -34,7 +34,7 @@ describe('Common Component config', function () {
   })
 
   it('should throw an error if "SERVICE_NAME" is not "todos"', async () => {
-    process.env.SERVICE_NAME = 'todos'
+    process.env.SERVICE_NAME = 'tods'
     const errMsg =
       'Config validation error: child "SERVICE_NAME" fails because ["SERVICE_NAME" must be one of [todos]]'
     expect(_ => require(module).SERVICE_NAME).to.throw(errMsg)
