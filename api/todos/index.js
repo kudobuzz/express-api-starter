@@ -1,17 +1,17 @@
 'use strict'
 
-const { router } = require('express')
-
+const { Router } = require('express')
+const router = new Router()
 const {
   getAllTodos,
   getTodo,
   createTodo
-} = require('../../services')
+} = require('../../services')()
 
 router
-  .get('/todos', getAllTodos)
-  .get('/todos/:id', getTodo)
-  .post('/todos', createTodo)
+  .get('/', getAllTodos)
+  .get('/:id', getTodo)
+  .post('/', createTodo)
 
 function todosRouter () {
   return router

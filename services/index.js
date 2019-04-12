@@ -1,6 +1,6 @@
 'use strict'
 
-const Todo = require('../models')
+const Todo = require('../models/todo')
 
 const todos = _ => {
   async function getAllTodos (req, res) {
@@ -9,19 +9,21 @@ const todos = _ => {
   }
 
   async function getTodo (req, res, next) {
-    Todo.findById(req.param.id, (err, todo) => {
+    Todo.findById(req.params.id, (err, todo) => {
       if (err) throw err
-      if (!todo) return res.status(404).send('Todo not found')
+      if (!todo) return res.status(404).send('Todo with todo_id  not found')
       return res.status(200).send(todo)
+     
     })
   }
   async function createTodo (req, res, next) {
-    Todo.create(req.body, (err, todo) => {
+    Todo.create(req.body, (err, todos) => {
       if (err) throw err
-      return res.status(200).send(todo)
+      return res.status(200).send(todos)
     })
   }
-  return Object.create({ getAllTodos,
+  return Object.create({ 
+    getAllTodos,
     getTodo,
     createTodo
   })

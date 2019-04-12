@@ -26,4 +26,4 @@ const toDoSchema = mongoose.Schema({
 
 const model = mongoose.model('todos', toDoSchema)
 
-module.exports = { model }
+module.exports = model 

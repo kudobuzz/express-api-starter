@@ -9,8 +9,9 @@ const app = express()
 function createApp () {
   app
     .use(bodyParser.json())
-    .use('v1', v1Router)
+    .use('/v1', v1Router)
 
   return app
 }
+
 module.exports = createApp
