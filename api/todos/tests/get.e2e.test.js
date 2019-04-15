@@ -18,6 +18,7 @@ describe('GET "/todos/todo_id', () => {
       })
       createdTodo = await todo.save()
     })
+    
     after(async () => {
       await mongoose.connection.db.dropDatabase()
       await mongoose.disconnect()
@@ -27,7 +28,7 @@ describe('GET "/todos/todo_id', () => {
         .get('/v1/todos/' + createdTodo._id)
         .expect(200)
         .then(res => {
-          return expect(res.body._id).to.eql(createdTodo._id.toString)
+          return expect(res.body._id).to.eql(createdTodo._id.toString())
         })
     })
   })

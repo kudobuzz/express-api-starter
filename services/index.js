@@ -17,9 +17,9 @@ const todos = _ => {
     })
   }
   async function createTodo (req, res, next) {
-    Todo.create(req.body, (err, todos) => {
+    Todo.create(req.body, (err, todo) => {
       if (err) throw err
-      return res.status(200).send(todos)
+      return res.status(200).send(todo)
     })
   }
   return Object.create({ 

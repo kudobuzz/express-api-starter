@@ -18,7 +18,7 @@ module.exports = {
     return request(app)
   },
   tearDown: async () => {
-    await mongoose.connections.dropDatabase()
+    await mongoose.connection.dropDatabase()
   },
   async closeMongoDB() {
     await mongoose.connection.close()
