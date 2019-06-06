@@ -41,11 +41,19 @@ The process.env files is in the config files
  when an app starts it enables you to test if all the variables are available if not it throws an error hence one can never deploy an app with missing variables.
 
 
+
 ## docs
 All the docs for this service should be here.
 
+### docs/api.yaml
+All api docs can go in here 
+
+### docs/webhooks.yaml 
+All webhook docs can go in here if you need one
+
 ## events
-This is where all the events handlers should be located. Events are very ideal for queue related operations.
+This is where all the events handlers should be located.
+
 
 
 ## lib
@@ -57,19 +65,20 @@ These are the helpful functions that accelerate the workflow and are often offer
 This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utilites or any build configs.
 
 ## services
-This is where all the business logic code should be located.
-for example encrypting and decrypting a token as well as communication with the models
+
+This is where all the business logic code should be located, usually grouped into features.
 
 ## tests
-This contains test configurations.  
-Often classified in subfolders 
-- test/setup.js
-:handles how to setup tests 
-- test/utils.js
- :To test the utilities 
+Here we usually have utilities we will need for test. Most test are close to their individual files
 
-- test/fixtures/ 
-   : This is a fixed state to allow the app  to be tested, this enables you to also clean up the code.
+### test/setup.js
+Contains things that should probably run b4 actual test, lik
+
+### test/utils.js
+Utitlies for test
+
+- test/fixtures/
+This is a fixed state to allow the app  to be tested, this enables you to also clean up the code.
 
 ## models
 This should contain the schemas ,it also contains all the details for the app to operate efficiently 
@@ -109,6 +118,11 @@ These other files include:
 
     Contains docker related [settings](https://docs.docker.com/)
 
+- ### services.json
+    
+    Pm2 config to make it easy to setup all processes
+    
+ 
 - #### package.json   
 
     Has all npm/yarn related stuff. Dependancies, run scripts E.t.c, this file will be created automatically when `npm init` or `yarn init` is run during the initialization of the project.
