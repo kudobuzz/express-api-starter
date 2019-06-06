@@ -21,21 +21,25 @@
 +-- [README.md](#README.md)
 
 ## api
-This basically contains code related to the api only. This include the api server, request validations,
-express middlewares and controllers. 
-The only interactions to any of the other components is to [services](#services). The whole idea is to keep the controllers as thin as possible so that business logic can be reused.
+Contains:
+ 1. Actions, scripts that interact with the services in [services](#services) folder.
+ 2. Endpoints, exposing the service to other services.
+ 3. Handles the validations and assertions of the requests
 
 ### api/common
-This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)). This usually includes shared request schemas, errors, middlewares  ..
-
+This folder contains all the logic that is shared across multiple files in the parent folder ([api](#api)).
+Here you also have middlewares like the express middleware that has access to the request and response objects.
 
 
 ## config
-Configs contains all env variables for the different processes involved, for example it will contain for the api as well  as individual processes in the workers too. 
-One thing we encourage is that , env variables should be properly validaited at startup time. 
+This is where configurations are loaded, configurations could be loaded from the environment variables either in production or in development based on where the service has been spawned.
+configs are grouped into components which allows you to manouver when you require the use of a service for example the mongodb url and many more.
 
-### config/components
-Components allows use to compose different configs into one config for a specific process type. By grouping configs into components it prevents having very large files of configs
+i.e.
+
+The process.env files is in the config files 
+ when an app starts it enables you to test if all the variables are available if not it throws an error hence one can never deploy an app with missing variables.
+
 
 
 ## docs
@@ -51,6 +55,7 @@ All webhook docs can go in here if you need one
 This is where all the events handlers should be located.
 
 
+
 ## lib
 Contains the wrappers to external libraries and utilities.
 These are the helpful functions that accelerate the workflow and are often offered as packages and can be installed with npm.
@@ -60,6 +65,7 @@ These are the helpful functions that accelerate the workflow and are often offer
 This contains all scripts that are run once, E.g. Migration scripts, indice creators, administrative scripts, local test utilites or any build configs.
 
 ## services
+
 This is where all the business logic code should be located, usually grouped into features.
 
 ## tests
